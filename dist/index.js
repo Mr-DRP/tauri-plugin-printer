@@ -130,7 +130,7 @@ const print_file = async (options) => {
     let tempfilename = null;
     let tempPath = "";
     if (typeof options.file != "undefined") {
-        const fileSignature = options.file.subarray(0, 4).toString('hex');
+        const fileSignature = options.file.subarray(0, 4).reduce((acc, val) => acc + val.toString(16), '');
         if (fileSignature != "25504446")
             throw new Error('File not supported');
         if (buffer_1.Buffer.isBuffer(options.file) == false)

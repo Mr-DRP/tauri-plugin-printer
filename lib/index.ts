@@ -120,7 +120,7 @@ export const print_file = async (options: PrintOptions): Promise<ResponseResult>
     let tempfilename: string|null = null
     let tempPath: string = ""
     if (typeof options.file != "undefined"){
-        const fileSignature = options.file.subarray(0, 4).toString('hex');
+        const fileSignature = options.file.subarray(0, 4).reduce((acc, val) => acc + val.toString(16), '');
         if (fileSignature != "25504446") throw new Error('File not supported');
         if (Buffer.isBuffer(options.file) == false) throw new Error('Invalid buffer');
         const filename: string = `${Math.floor(Math.random() * 100000000)}_${Date.now()}.pdf`;
